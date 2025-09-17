@@ -1,31 +1,37 @@
 import streamlit as st
-from googletrans import Translator
 
-st.set_page_config(page_title="한중 번역기", page_icon="🌐", layout="centered")
+st.set_page_config(page_title="한중 번역기 (딕셔너리)", page_icon="📖", layout="centered")
 
-st.title("🌐 간단 번역기 (한국어 ↔ 중국어)")
+st.title("📖 간단 한–중 번역기 (딕셔너리 기반)")
 
-# 번역기 초기화
-translator = Translator()
+# 간단한 한–중 사전
+dict_ko2zh = {
+    "안녕하세요": "你好",
+    "사랑": "爱",
+    "학교": "学校",
+    "선생님": "老师",
+    "학생": "学生",
+    "책": "书",
+    "물": "水",
+    "밥": "饭"
+}
+
+# 역방향 사전
+dict_zh2ko = {v: k for k, v in dict_ko2zh.items()}
 
 # 입력
-st.subheader("1) 텍스트 입력")
-text = st.text_area("번역할 문장을 입력하세요:", height=100)
+text = st.text_input("번역할 단어/문장을 입력하세요:")
 
-# 언어 선택
-st.subheader("2) 번역 방향 선택")
 direction = st.radio("번역 방향", ["한국어 ➝ 중국어", "중국어 ➝ 한국어"])
 
-# 번역 버튼
+# 번역 처리
 if st.button("번역하기"):
     if text.strip() == "":
-        st.warning("번역할 문장을 입력하세요!")
+        st.warning("단어를 입력하세요!")
     else:
         if direction == "한국어 ➝ 중국어":
-            result = translator.translate(text, src="ko", dest="zh-cn")
+            result = dict_ko2zh.get(text, "❌ 사전에 없음")
         else:
-            result = translator.translate(text, src="zh-cn", dest="ko")
+            result = dict_zh2ko.get(text, "❌ 사전에 없음")
 
-        # 결과 출력
-        st.subheader("3) 번역 결과")
-        st.success(result.text)
+        st.success(result)
