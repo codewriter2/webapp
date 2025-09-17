@@ -1,8 +1,8 @@
 import streamlit as st
 
-st.set_page_config(page_title="한중 번역기 (딕셔너리)", page_icon="📖", layout="centered")
+st.set_page_config(page_title="한-중 단어 사전", page_icon="📖", layout="centered")
 
-st.title("📖 간단 한–중 번역기 (딕셔너리 기반)")
+st.title("📖 한-중 단어 사전")
 
 # 간단한 한–중 사전
 dict_ko2zh = {
@@ -35,3 +35,4 @@ if st.button("번역하기"):
             result = dict_zh2ko.get(text, "❌ 사전에 없음")
 
         st.success(result)
+
