@@ -37,11 +37,6 @@ with col1:
     for ko, zh in dict_ko2zh.items():
         st.write(f"{ko} → {zh}")
 
-with col2:
-    st.markdown("**중국어 → 한국어**")
-    for zh, ko in dict_zh2ko.items():
-        st.write(f"{zh} → {ko}")
-
 # 입력
 text = st.text_input("번역할 단어/문장을 입력하세요:")
 
@@ -58,5 +53,6 @@ if st.button("번역하기"):
             result = dict_zh2ko.get(text, "❌ 사전에 없음")
 
         st.success(result)
+
 
 
