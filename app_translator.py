@@ -31,11 +31,10 @@ dict_ko2zh = {
 dict_zh2ko = {v: k for k, v in dict_ko2zh.items()}
 # 📌 예시 단어 보여주기
 st.subheader("📌 사용 가능한 예시 단어")
-col1, col2 = st.columns(2)
-with col1:
-    st.markdown("**한국어 → 중국어**")
-    for ko, zh in dict_ko2zh.items():
-        st.write(f"{ko} → {zh}")
+
+ko_examples = " | ".join([f"{ko}→{zh}" for ko, zh in dict_ko2zh.items()])
+
+st.markdown(f"**한국어 → 중국어**: {ko_examples}")
 
 # 입력
 text = st.text_input("번역할 단어/문장을 입력하세요:")
@@ -53,6 +52,7 @@ if st.button("번역하기"):
             result = dict_zh2ko.get(text, "❌ 사전에 없음")
 
         st.success(result)
+
 
 
 
